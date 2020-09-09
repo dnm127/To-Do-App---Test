@@ -22,6 +22,7 @@ export default function NewTask(props: any) {
             dispatch(add(data));
         }
         else {
+            data.dueDate = selectedDate;
             dispatch(update(data))
         }
     }
@@ -34,7 +35,7 @@ export default function NewTask(props: any) {
         return mm + '/' + dd + '/' + yyyy;
     }
 
-    const [selectedDate, setSelectedDate] = useState(getToday());
+    const [selectedDate, setSelectedDate] = useState(task ? task.dueDate : getToday());
 
     const handleDateChange = (date:any) => {
         setSelectedDate(date);
@@ -51,30 +52,35 @@ export default function NewTask(props: any) {
                 <Label>Description</Label>
                 <TextArea name="description" ref={register} defaultValue={task.description}></TextArea>
 
-                <label>Due date</label>
-                {/* <input name="dueDate" defaultValue={task.dueDate} type="date" ref={register}/> */}
-                <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        name="dueDate"
-                        format="dd MMMM yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        value={task.dueDate}
-                        onChange={handleDateChange}
-                    />
-                </MuiPickersUtilsProvider>
-
-                <label>Priority</label>
-                <select name="priority" defaultValue={task.priority} ref={register}>
-                    {
-                        priorityArr.map((priority: Priority, index: number) => {
-                            return <option ref={register} key={priority.value+index} value={priority.value.toLowerCase()}>{priority.value}</option>
-                        })
-                    }
-                </select>
-                <button type="submit">Update</button>
+                <SubContainer>
+                    <div>
+                        <Label>Due date</Label>
+                        {/* <input name="dueDate" defaultValue={task.dueDate} type="date" ref={register}/> */}
+                        <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                            <DateInput
+                                disableToolbar
+                                variant="inline"
+                                name="dueDate"
+                                format="dd MMMM yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </div>
+                    <div>
+                        <Label>Priority</Label>
+                        <SelectPriority name="priority" defaultValue={task.priority} ref={register}>
+                            {
+                                priorityArr.map((priority: Priority, index: number) => {
+                                    return <option ref={register} key={priority.value+index} value={priority.value.toLowerCase()}>{priority.value}</option>
+                                })
+                            }
+                        </SelectPriority>
+                    </div>
+                </SubContainer>
+                <AddBtn type="submit">Update</AddBtn>
             </form>
             : 
             <>

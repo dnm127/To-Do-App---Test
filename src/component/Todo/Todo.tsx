@@ -35,6 +35,7 @@ export default function Todo(props: any) {
     }
 
     return (
+        <div>
         <TodoContainer key={todo.id}>
             <div>
                 <TaskNameContainer>
@@ -46,12 +47,13 @@ export default function Todo(props: any) {
                     <RemoveBtn onClick={() => deleteTask(todo)}>Remove</RemoveBtn>
                 </div>
             </div>
-            {
-                (selectedTask as any).id && 
-                <>
-                    <NewTask task={selectedTask}/>
-                </>
-            }
         </TodoContainer>
+        {
+            (selectedTask as any).id && 
+            <div style={{border: '1px solid black'}}>
+                <NewTask task={selectedTask}/>
+            </div>
+        }
+        </div>
     )
 }

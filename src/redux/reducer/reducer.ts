@@ -14,6 +14,7 @@ export const todoReducer = (state: Task[] = [], action: reduxAction) => {
             return [...state];
         case 'UPDATE':
             const newData = action.payload.value;
+            console.log(newData);
             state = state.filter((item:any) => item.id != newData.id);                
             state = state.concat(newData);
             return [...state];

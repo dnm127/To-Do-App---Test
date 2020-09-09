@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const NewTaskContainer = styled.div`
-    width: 45%;
+    /* width: 100%; */
     height: 100%;
     padding: 20px 30px 20px 30px;
     /* border-right: 1px solid black; */
@@ -18,7 +18,7 @@ export const NewTaskContainer = styled.div`
 `;
 
 export const TodoListContainer = styled.div`
-    width: 55%;
+    /* width: 100%; */
     /* padding: 20px 30px 20px 30px; */
     height: 100%;
     border-left: 1px solid black;
@@ -164,8 +164,7 @@ export const TodoContainer = styled.div`
     display: flex;
     align-items: center;
     padding: 5px 15px; 
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 20px;
 
     & > div {
         width: 100%;

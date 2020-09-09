@@ -14,8 +14,12 @@ function App() {
   return (
     <Provider store={store}>
       <Container>
-        <NewTask/>
-        <TodoList/>
+        <div style={{width: '45%'}}>        
+          <NewTask/>
+        </div>
+        <div style={{width: '55%'}}>        
+          <TodoList/>
+        </div>
       </Container>
     </Provider>
   );
