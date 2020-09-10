@@ -1,16 +1,16 @@
-import React , {useState}from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { priority as priorityArr} from '../common/constant';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { add, update } from '../redux/action/actions';
 import { generateId } from '../common/function';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { NewTaskContainer,Title, TaskInput, Label, TextArea, SubContainer, DateInput, AddBtn, SelectPriority } from '../common/style';
-import { Priority, Task } from '../common/interface';
+import { Priority } from '../common/interface';
 
 export default function NewTask(props: any) {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors, reset } = useForm();
     const dispatch = useDispatch();
     const task = props.task;
 
@@ -25,6 +25,7 @@ export default function NewTask(props: any) {
             data.dueDate = selectedDate;
             dispatch(update(data))
         }
+        reset();
     }
 
     const getToday = () => {
@@ -46,8 +47,9 @@ export default function NewTask(props: any) {
         {
             task ?
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input name="id" value={task.id} type="hidden" ref={register}/>
+                <input name="id" value={task.id} type="hidden" ref={register({ required: true })}/>
                 <TaskInput name="task" defaultValue={task.task} type="text" ref={register} placeholder="Add new task ..."/>
+                {errors.task && <div>Task name is required</div>}
 
                 <Label>Description</Label>
                 <TextArea name="description" ref={register} defaultValue={task.description}></TextArea>
@@ -86,7 +88,8 @@ export default function NewTask(props: any) {
             <>
                 <Title>New task</Title>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <TaskInput name="task" type="text" ref={register} placeholder="Add new task ..."/>
+                    <TaskInput name="task" type="text" ref={register({ required: true })} placeholder="Add new task ..."/>
+                    {errors.task && <div>Task name is required</div>}
 
                     <Label>Description</Label>
                     <TextArea name="description" ref={register}></TextArea>

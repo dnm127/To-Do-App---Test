@@ -1,5 +1,11 @@
 import { Task } from "../../common/interface"
 
+export const fetchInit = () => {
+    return {
+        type: 'FETCH'
+    }
+}
+
 export const add = (task: Task) => {
     return {
         type: 'ADD',

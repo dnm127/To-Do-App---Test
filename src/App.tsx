@@ -13,7 +13,7 @@ const store = createStore(rootReducer)
 function App() {
   return (
     <Provider store={store}>
-      <Container>
+      <Container className="mainContainer">
         <div style={{width: '45%'}}>        
           <NewTask/>
         </div>

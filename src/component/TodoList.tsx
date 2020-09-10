@@ -1,33 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { remove } from '../redux/action/actions';
-import { getDataFromLocalStorage } from '../common/function';
-import NewTask from './NewTask';
+import { remove, fetchInit } from '../redux/action/actions';
 import Todo from './Todo/Todo';
 import { TodoListContainer, Title, TaskInput, BulkContainer, RemoveBtn, DoneBtn } from '../common/style';
 import { Task } from '../common/interface';
 
 export default function TodoList() {
     const todos = useSelector((state:any) => state.todoReducer);
-    // const todos = [
-    //     {task: "a", description: "1", priority: "low", id: 1599661553059, dueDate: "09/09/2020"},
-    //     {task: "b", description: "2", priority: "low", id: 1599661556273, dueDate: "09/09/2020"},
-    //     {task: "c", description: "3", priority: "low", id: 1599661553054, dueDate: "09/09/2020"},
-    //     {task: "d", description: "4", priority: "low", id: 1599661556279, dueDate: "09/09/2020"},
-    //     {task: "ad", description: "", priority: "low", id: 1599661553051, dueDate: "09/09/2020"},
-    //     {task: "bc", description: "", priority: "low", id: 1599661556270, dueDate: "09/09/2020"},
-    //     {task: "ad", description: "", priority: "low", id: 1599661553051, dueDate: "09/09/2020"},
-    //     {task: "td", description: "", priority: "low", id: 1599661553099, dueDate: "09/09/2020"},
-    //     {task: "kn", description: "", priority: "low", id: 1599661553076, dueDate: "09/09/2020"},
-    //     {task: "er", description: "", priority: "low", id: 1599661553033, dueDate: "09/09/2020"},
-    // ]
     const selectedTasks = useSelector((state: any) => state.selectedTaskReducer);
     const dispatch = useDispatch();
     const [searchResult, setSearchResult] = useState(new Array<Task>());
 
+    useEffect(() => {
+        dispatch(fetchInit());
+    }, [dispatch])
+
     const deleteSelectedTasks = (data: Task[]) => {
         data.map((task: Task) => {
-            dispatch(remove(task));
+            return dispatch(remove(task));
         })
         selectedTasks.length = 0;
     }

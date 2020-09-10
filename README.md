@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ##  Đặng Nhật Minh
 
+- Create and remove To Do task 
+- Use localstorage to save data
+- Responsive on mobile
+
 ## Available Scripts
 
 In the project directory, you can run:

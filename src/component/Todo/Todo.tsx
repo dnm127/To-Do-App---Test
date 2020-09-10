@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NewTask from '../NewTask';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { remove, setSelectedTaskBulkAction, unsetSelectedTaskBulkAction } from '../../redux/action/actions';
 import { DetailBtn, RemoveBtn, TodoContainer, Checkbox, TaskName, TaskNameContainer } from '../../common/style';
 import { Task } from '../../common/interface';
